@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { updateMovie } from "./Action";
+import './Movie.css';
+
 
 function UpdateMovie({movie}) {
   
@@ -29,21 +31,7 @@ function UpdateMovie({movie}) {
     
     const [isReadOnly,setIsReadOnly]=useState(false);
 
-    const handleInputChange=(key,value)=>{
-        if(key==='name')setName(value);
-        else if(key==='description')setDescription(value);
-        else if(key==='rating')setRating(value);
-        else if(key==='director')setDirector(value);
-        else if(key==='stars')setStars(value);
-        else if(key==='disc')setDisc(value);
-        else if(key==='duration')setDuration(value);
-        else if(key==='genre')setGenre(value);
-        else if(key==='releaseDate')setReleaseDate(value);
-        else if(key==='imageSrc')setImageSrc(value);
-        else if(key==='url')setUrl(value);
-      };
-
-      const handleUpdateMovie=()=>{
+    const handleUpdateMovie=()=>{
 
         const movieData={
             id,
@@ -119,8 +107,8 @@ function UpdateMovie({movie}) {
                  <input type="text" value={imageSrcNew} name="imageSrc" className="form-control" id="imageSrc" onChange={(e) => setImageSrc(e.target.value)} style={{backgroundColor:isReadOnly?'#758AA2':'#00000000'}} readOnly={isReadOnly} placeholder="Image Src"/>
               </div>
               <div className="text-right">
-                <button disabled={isReadOnly} className="button dark" onClick={handleUpdateMovie} style={{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}}>
-                    <label>{isReadOnly?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}</label>
+                <button disabled={isReadOnly} className="updateMovieButton" onClick={handleUpdateMovie} style={{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}}>
+                    <label className="updateMovieButtonText">{isReadOnly?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}</label>
                 </button>
               </div>
            </form>

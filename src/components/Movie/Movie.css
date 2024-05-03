@@ -61,3 +61,23 @@ color: white;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  margin: 10;
+  padding: 10;
+  border-radius: 5;
+  border-width: 1;
+  cursor: pointer;
+}
+
+.updateMovieButtonText {
+    color:white;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.updateMovieButton {
+    background-color:#1FAA59;
+    border-radius: 5px;
+}

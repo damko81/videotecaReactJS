@@ -10,6 +10,7 @@ import Movies from "./pages/movies";
 import SignUp from "./pages/signup";
 import LogIn from "./pages/login";
 import { useGetMovies } from './components/Movie/Action';
+import LoadDeleteMovies from './pages/LoadDeleteMovies';
 
 function App() {
  
@@ -23,6 +24,10 @@ function App() {
                     <Route
                         path="/movies"
                         element={<Movies movies={movies} />}
+                    />
+                      <Route
+                        path="/loaddeletemovies"
+                        element={<LoadDeleteMovies/>}
                     />
                     <Route
                         path="/log-in"

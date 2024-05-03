@@ -18,6 +18,18 @@ const [movies, setMovies] = useState([]);
       return movies.sort((a, b) => a.name.localeCompare(b.name));
 };
 
+export const loadMovies = async (disc) => {
+  var discTmp = disc.replace(/\\/g, '!');
+  const res= await api.post(`/movie/mobileLoad/${discTmp}`)
+  return res;
+};
+
+export const deleteMovieByDisc = async (disc) => {
+  var discTmp = disc.replace(/\\/g, '!');
+  const res= await api.delete(`/movie/deleteMovieByDisc/${discTmp}`)
+  return res;
+};
+
 export const updateMovie = async (movieData) => {
   
   const res= await api.put('/movie/update',movieData);

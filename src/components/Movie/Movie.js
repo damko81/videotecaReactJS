@@ -22,7 +22,7 @@ const deleteDialog = (id) => {
         <div className="card m-b-30">
             <div className="card-body row">
                 <div className="col-6">
-                    <a href={movie.url}><img src={movie.imageSrc} alt="" class="img-fluid rounded-circle w-60"/></a>
+                    <a href={movie.url}><img src={movie.imageSrc} alt="" className="img-fluid rounded-circle w-60"/></a>
                     <p className="m-0">{movie.duration}</p>
                     <p className="m-0">Disc: {movie.disc}</p>
                 </div>
