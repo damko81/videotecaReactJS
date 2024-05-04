@@ -1,6 +1,16 @@
 import { api } from "../config/api";
 import Cookies from 'js-cookie';
 
+export const signUpUser = async reqData => {
+  try {
+
+      await api.post('/users/save', reqData);
+    
+  } catch (error) {
+    console.error('Error signing up user:', error);
+  }
+};
+
 // singin user
 export const signInUser = async reqData => {
     try {

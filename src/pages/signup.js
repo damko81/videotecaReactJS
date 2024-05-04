@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { signUpUser } from "./Action";
 
 const SignUp = () => {
+   
+    const [name,setName]=useState('');
+    const [username,setUsername]=useState('');
+    const [password,setPassword]=useState('');
+
+    const handleRegister  = () => {
+
+        const values = {
+            name,
+            username,
+            password
+          }
+
+        signUpUser(values);
+    };
+
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "centre",
-                alignItems: "centre",
-                height: "100vh",
-            }}
-        >
-            <h1>Sign Up</h1>
+        <div className="container col-lg-6">
+            <h1 className="text-center">Registration</h1>
+            <div className="card">
+                <form>
+                    <div className="form-group">
+                    <label>Full Name</label>
+                    <input type="text" className="form-control" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter Name" required/>
+                    </div>
+                    <div clclassNameass="form-group">
+                        <label>Username</label>
+                        <input type="username" className="form-control" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter Username" required/>
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" className="form-control" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}  placeholder="Enter Password" required/>
+                    </div>
+                    <div className="form-group">
+                        <label>Password (Confirm)</label>
+                        <input type="password" className="form-control" name="passwordConf" id="passwordConf" placeholder="Please confirm password" required/>
+                    </div>
+                    <button onClick={handleRegister} className="btn btn-primary">Register</button>
+                </form>
+            </div>
         </div>
     );
 };
