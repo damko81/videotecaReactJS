@@ -11,6 +11,7 @@ import SignUp from "./pages/signup";
 import LogIn from "./pages/login";
 import { useGetMovies } from './components/Movie/Action';
 import LoadDeleteMovies from './pages/LoadDeleteMovies';
+import CreateMovie from './components/Movie/CreateMovie';
 
 function App() {
  
@@ -28,6 +29,10 @@ function App() {
                       <Route
                         path="/loaddeletemovies"
                         element={<LoadDeleteMovies/>}
+                    />
+                    <Route
+                        path="/createmovie"
+                        element={<CreateMovie/>}
                     />
                     <Route
                         path="/log-in"

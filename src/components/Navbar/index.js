@@ -24,6 +24,9 @@ const Navbar = () => {
                     <NavLink to="/loaddeletemovies" activeStyle>
                         Load/Delete
                     </NavLink>
+                    <NavLink to="/createmovie" activeStyle>
+                        Add Movie
+                    </NavLink>
                 </NavMenu>
             </Nav>
         </>

@@ -36,6 +36,12 @@ export const updateMovie = async (movieData) => {
   return res;
 };
 
+export const createMovie = async (movieData) => {
+
+  const res= await api.post('/movie/add',movieData);
+  return res;
+};
+
 export const deleteMovie = async (id) => {
 
     const res= await api.delete(`/movie/delete/${id}`);

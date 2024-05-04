@@ -32,7 +32,7 @@ export default function LoadDeleteMovies() {
  
   return (
 
-    <div className="modal-content">
+    <div className="LoadDeleteMovies">
         <div className="modal-header">
            <h5 className="modal-title" id="updateMovieModalLabel">Load/Delete Movies</h5>
         </div>
