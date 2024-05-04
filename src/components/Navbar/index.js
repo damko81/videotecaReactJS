@@ -13,7 +13,7 @@ const Navbar = () => {
     
     const handleLogout = () => {
         logoutUserAction(); 
-        window.location.reload(false);
+        window.location.reload(true);
     };
 
     return (

@@ -16,7 +16,7 @@ const Login = () => {
                     
         isValidLogin = await signInUser(values);
         if(isValidLogin){
-            window.location.reload(false);
+            window.location.reload(true);
           }
     };
 
