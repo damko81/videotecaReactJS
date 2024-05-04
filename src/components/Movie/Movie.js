@@ -2,8 +2,11 @@ import { deleteMovie } from './Action';
 import './Movie.css';
 import React, { useState } from "react";
 import UpdateMovie from './UpdateMovie';
+import { getUsername } from '../../pages/Action';
 
 const Movie = ({ movie }) => {
+
+let username = getUsername();    
 
 const [showUpdateMovie, setShowUpdateMovie] = useState(false);   
 
@@ -39,7 +42,9 @@ const deleteDialog = (id) => {
             <div className="card-body">
                 <div className="float-right btn-group btn-group-sm">
                     <button className="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" onClick={() => setShowUpdateMovie(!showUpdateMovie)}><i className="fa fa-pencil"></i></button>
-                    <button className="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" onClick={() => deleteDialog(movie.id)}><i className="fa fa-times"></i></button>
+                    {username!==null && username!==undefined &&
+                        <button className="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" onClick={() => deleteDialog(movie.id)}><i className="fa fa-times"></i></button>
+                    }
                 </div>
             </div>
         </div>

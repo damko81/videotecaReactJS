@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateMovie } from "./Action";
 import './Movie.css';
+import { getUsername } from "../../pages/Action";
 
 
 function UpdateMovie({movie}) {
@@ -30,6 +31,7 @@ function UpdateMovie({movie}) {
     const [urlNew,setUrl]=useState(url);  
     
     const [isReadOnly,setIsReadOnly]=useState(false);
+    let username = getUsername();
 
     const handleUpdateMovie=()=>{
 
@@ -106,11 +108,13 @@ function UpdateMovie({movie}) {
                  <label for="imageSrc">Image Src</label>
                  <input type="text" value={imageSrcNew} name="imageSrc" className="form-control" id="imageSrc" onChange={(e) => setImageSrc(e.target.value)} style={{backgroundColor:isReadOnly?'#758AA2':'#00000000'}} readOnly={isReadOnly} placeholder="Image Src"/>
               </div>
+              {username!==null && username!==undefined &&
               <div className="text-right">
                 <button disabled={isReadOnly} className="updateMovieButton" onClick={handleUpdateMovie} style={{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}}>
                     <label className="updateMovieButtonText">{isReadOnly?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}</label>
                 </button>
               </div>
+              }
            </form>
         </div>
      </div>

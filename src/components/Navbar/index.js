@@ -45,12 +45,16 @@ const Navbar = () => {
                                Log Out
                         </NavLink>
                     }
+                    { (username!==null && username!==undefined) &&
                     <NavLink to="/loaddeletemovies" activeStyle>
                         Load/Delete
                     </NavLink>
+                    }
+                    { (username!==null && username!==undefined) &&
                     <NavLink to="/createmovie" activeStyle>
                         Add Movie
                     </NavLink>
+                    }
                 </NavMenu>
             </Nav>
         </>
