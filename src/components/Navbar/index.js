@@ -24,7 +24,7 @@ const Navbar = () => {
                     <NavLink to="/movies" activeStyle>
                         VIDEOTECA
                     </NavLink>
-                    <NavLink activeStyle>
+                    <NavLink to="/profile" activeStyle>
                         {username}
                     </NavLink>
                     <NavLink to="/movies" activeStyle>

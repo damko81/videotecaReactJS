@@ -9,6 +9,7 @@ import Home from "./pages";
 import Movies from "./pages/movies";
 import SignUp from "./pages/signup";
 import LogIn from "./pages/login";
+import Profile from "./pages/profile";
 import { useGetMovies } from './components/Movie/Action';
 import LoadDeleteMovies from './pages/LoadDeleteMovies';
 import CreateMovie from './components/Movie/CreateMovie';
@@ -41,6 +42,10 @@ function App() {
                     <Route
                         path="/sign-up"
                         element={<SignUp />}
+                    />
+                     <Route
+                        path="/profile"
+                        element={<Profile />}
                     />
                 </Routes>
             </Router>

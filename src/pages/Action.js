@@ -15,10 +15,13 @@ export const signUpUser = async reqData => {
 export const signInUser = async reqData => {
     try {
             const response = await api.post('/users/login', reqData);
-            const {username} = response.data;
+            const {id, name, password,username} = response.data;
          
             // Store the credentials
+            Cookies.set('id', id);
+            Cookies.set('name', name);
             Cookies.set('username', username);
+            Cookies.set('password', password);
     
             return true;
           
@@ -28,10 +31,34 @@ export const signInUser = async reqData => {
     }
   };
 
-  export const getUsername = () => {
+export const updateUserAction = async reqData => {
+  try {
+        await api.put('/users/update', reqData);
+        
+  } catch (error) {
+    console.error('Error update in user:', error,reqData);
+  }
+};    
+
+export const getUsername = () => {
       return Cookies.get("username");
   };
 
+export const getPassword = () => {
+     return Cookies.get("password");
+  };  
+
+export const getId = () => {
+     return Cookies.get("id");
+  };
+
+export const getName = () => {
+    return Cookies.get("name");
+  };
+
 export const logoutUserAction = () => {
+    Cookies.remove('id');
+    Cookies.remove('name');
     Cookies.remove('username');
+    Cookies.remove('password');
   };
