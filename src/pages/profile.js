@@ -3,10 +3,10 @@ import { getId, getName, getPassword, getUsername, logoutUserAction, updateUserA
 
 export default function useProfile() {
 
-  const [id,setId]=useState(getId());
+  const [id]=useState(getId());
   const [name,setName]=useState(getName());
   const [username,setUsername]=useState(getUsername());
-  const [password,setPassword]=useState(getPassword());
+  const [password]=useState(getPassword());
   const [newPassword,setNewPassword]=useState(null);
   const [newPasswordConf,setNewPasswordConf]=useState(null);
 
