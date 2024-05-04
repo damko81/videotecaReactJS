@@ -5,22 +5,46 @@ import {
     Bars,
     NavMenu
 } from "./NavbarElements";
+import {getUsername, logoutUserAction } from "../../pages/Action";
 
 const Navbar = () => {
+
+    let username = getUsername();
+    
+    const handleLogout = () => {
+        logoutUserAction(); 
+        window.location.reload(false);
+    };
+
     return (
         <>
             <Nav>
                 <Bars/>
                 <NavMenu>
                     <NavLink to="/movies" activeStyle>
+                        VIDEOTECA
+                    </NavLink>
+                    <NavLink activeStyle>
+                        {username}
+                    </NavLink>
+                    <NavLink to="/movies" activeStyle>
                         Movies
                     </NavLink>
-                    <NavLink to="/log-in" activeStyle>
-                        Log In
-                    </NavLink>
-                    <NavLink to="/sign-up" activeStyle>
-                        Sign Up
-                    </NavLink>
+                    { (username===null  || username===undefined) &&
+                        <NavLink to="/log-in" activeStyle>
+                            Log In
+                        </NavLink>
+                    }
+                    { (username===null  || username===undefined) &&
+                        <NavLink to="/sign-up" activeStyle>
+                            Sign Up
+                        </NavLink>
+                    }
+                     { (username!==null && username!==undefined) &&
+                        <NavLink onClick={handleLogout} activeStyle>
+                               Log Out
+                        </NavLink>
+                    }
                     <NavLink to="/loaddeletemovies" activeStyle>
                         Load/Delete
                     </NavLink>

@@ -42,7 +42,7 @@ function CreateMovie() {
 
       return (
            
-      <div className="createMovie">
+      <div className="container col-lg-6">
         <div className="modal-header">
            <h5 className="modal-title" id="createMovieModalLabel">Create Movie</h5>
         </div>
