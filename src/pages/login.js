@@ -34,7 +34,7 @@ const Login = () => {
                             <label>Password:</label>
                             <input type="password" className="form-control" value={password} name="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" required/>
                         </div>
-                        <button onClick={handleLogin()} className="btn btn-success">Login</button>
+                        <button type="button" onClick={handleLogin()} className="btn btn-success">Login</button>
                     </form>
                 </div>
             </div>

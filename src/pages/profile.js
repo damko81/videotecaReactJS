@@ -16,7 +16,7 @@ export default function useProfile() {
 
   const handleLogout=()=>{
     logoutUserAction();
-    setUsername("username");
+    window.location.reload(true);
   }
 
   const handleUpdate=()=>{
@@ -25,7 +25,7 @@ export default function useProfile() {
                     id:id,
                     name:name,
                     username:username,
-                    password:(newPassword !== null && newPassword !== '' && newPassword === newPasswordConf)?newPassword:password
+                    password:(newPassword !== null && newPassword !== '' && newPasswordConf !== null && newPasswordConf !== '' && newPassword === newPasswordConf)?newPassword:password
                  };
   
     updateUserAction(values);
@@ -72,8 +72,8 @@ export default function useProfile() {
                       </div>
                     }
                     <div className="modal-footer">
-                      <button className="btn btn-primary" onClick={() => setChangePassword(!changePassword)}>Change password</button>
-                      <button className="btn btn-primary" onClick={updateDialog}>Save changes</button>
+                      <button type="button" className="btn btn-primary" onClick={() => setChangePassword(!changePassword)}>Change password</button>
+                      <button type="button" className="btn btn-primary" onClick={updateDialog}>Save changes</button>
                     </div>
                 </form>
               </div>
