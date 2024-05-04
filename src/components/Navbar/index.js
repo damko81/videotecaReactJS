@@ -27,6 +27,11 @@ const Navbar = () => {
                     <NavLink to="/profile" activeStyle>
                         {username}
                     </NavLink>
+                    { (username!==null && username!==undefined) &&
+                        <NavLink onClick={handleLogout} activeStyle>
+                               Log Out
+                        </NavLink>
+                    }
                     <NavLink to="/movies" activeStyle>
                         Movies
                     </NavLink>
@@ -38,11 +43,6 @@ const Navbar = () => {
                     { (username===null  || username===undefined) &&
                         <NavLink to="/sign-up" activeStyle>
                             Sign Up
-                        </NavLink>
-                    }
-                     { (username!==null && username!==undefined) &&
-                        <NavLink onClick={handleLogout} activeStyle>
-                               Log Out
                         </NavLink>
                     }
                     { (username!==null && username!==undefined) &&
