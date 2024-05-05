@@ -8,7 +8,8 @@ const Login = () => {
 
     var isValidLogin = false;
 
-    const handleLogin = async () => {
+    const handleLogin = async e => {
+        e.preventDefault();
         const values = {
                          username,
                          password
@@ -34,7 +35,7 @@ const Login = () => {
                             <label>Password:</label>
                             <input type="password" className="form-control" value={password} name="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" required/>
                         </div>
-                        <button type="button" onClick={handleLogin()} className="btn btn-success">Login</button>
+                        <button type="button" onClick={handleLogin} className="btn btn-success">Login</button>
                     </form>
                 </div>
             </div>
