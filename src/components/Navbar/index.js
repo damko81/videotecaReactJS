@@ -24,14 +24,6 @@ const Navbar = () => {
                     <NavLink to="/movies" activeStyle>
                         VIDEOTECA
                     </NavLink>
-                    <NavLink to="/profile" activeStyle>
-                        {username}
-                    </NavLink>
-                    { (username!==null && username!==undefined) &&
-                        <NavLink onClick={handleLogout} activeStyle>
-                               Log Out
-                        </NavLink>
-                    }
                     <NavLink to="/movies" activeStyle>
                         Movies
                     </NavLink>
@@ -54,6 +46,14 @@ const Navbar = () => {
                     <NavLink to="/createmovie" activeStyle>
                         Add Movie
                     </NavLink>
+                    }
+                    <NavLink to="/profile" activeStyle>
+                        {username}
+                    </NavLink>
+                    { (username!==null && username!==undefined) &&
+                        <NavLink onClick={handleLogout} activeStyle>
+                               Log Out
+                        </NavLink>
                     }
                 </NavMenu>
             </Nav>

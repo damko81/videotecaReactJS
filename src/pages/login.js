@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { signInUser } from "./Action";
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
+    const navigate = useNavigate();
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
 
@@ -17,6 +19,7 @@ const Login = () => {
                     
         isValidLogin = await signInUser(values);
         if(isValidLogin){
+            navigate("/movies");
             window.location.reload(true);
           }
     };
