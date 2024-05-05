@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { signUpUser } from "./Action";
+import { useNavigate } from "react-router-dom"
 
 const SignUp = () => {
    
+    const navigate = useNavigate();
     const [name,setName]=useState('');
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
+    const [passwordConf,setPasswordConf]=useState('');
 
     const handleRegister  = () => {
 
@@ -14,8 +17,10 @@ const SignUp = () => {
             username,
             password
           }
-
-        signUpUser(values);
+        if(password !== '' && passwordConf !== '' && password===passwordConf){
+            signUpUser(values);
+            navigate("/log-in");
+        }
     };
 
     return (
@@ -37,7 +42,7 @@ const SignUp = () => {
                     </div>
                     <div className="form-group">
                         <label>Password (Confirm)</label>
-                        <input type="password" className="form-control" name="passwordConf" id="passwordConf" placeholder="Please confirm password" required/>
+                        <input type="password" className="form-control" name="passwordConf" id="passwordConf" value={passwordConf} onChange={(e) => setPasswordConf(e.target.value)}  placeholder="Please confirm password" required/>
                     </div>
                     <button onClick={handleRegister} className="btn btn-primary">Register</button>
                 </form>
