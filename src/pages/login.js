@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signInUser } from "./Action";
 import { useNavigate } from "react-router-dom"
+import * as yup from 'yup'
 
 const Login = () => {
 
@@ -24,6 +25,29 @@ const Login = () => {
           }
     };
 
+    const userSchema = yup.object().shape({
+        // username can not be an empty string so we will use the required function
+        username: yup.string().required(),
+        // password can not be an empty string so we will use the required function. Also, we have used the `min` function to set the minimum length of the password. Yup passwords by default handle the conditions of at least one upper case, at least one lower case, and at least one special character in the password
+        password: yup.string().min(6).required(),
+    })
+
+    const validateForm = async e => {
+        // creating a form data object
+        let dataObject = {
+          username: username,
+          password: password,
+        }
+    
+        // validating this dataObject concerning Yup userSchema
+        const isValid = await userSchema.isValid(dataObject)
+        if (isValid) {
+            handleLogin(e);
+        } else {
+          alert('Form is Invalid')
+        }
+    }
+
     return (
         <div className="container col-lg-6">
             <h1 className="text-center">Login</h1>
@@ -38,7 +62,7 @@ const Login = () => {
                             <label>Password:</label>
                             <input type="password" className="form-control" value={password} name="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" required/>
                         </div>
-                        <button type="button" onClick={handleLogin} className="btn btn-success">Login</button>
+                        <button type="button" onClick={validateForm} className="btn btn-success">Login</button>
                     </form>
                 </div>
             </div>

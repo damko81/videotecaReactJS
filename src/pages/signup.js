@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signUpUser } from "./Action";
 import { useNavigate } from "react-router-dom"
+import * as yup from 'yup'
 
 const SignUp = () => {
    
@@ -17,11 +18,40 @@ const SignUp = () => {
             username,
             password
           }
-        if(password !== '' && passwordConf !== '' && password===passwordConf){
-            signUpUser(values);
-            navigate("/log-in");
-        }
+          signUpUser(values);
+          navigate("/log-in");
     };
+
+    const userSchema = yup.object().shape({
+        // name can not be an empty string so we will use the required function
+        name: yup.string().required('Name is required'),
+        // username can not be an empty string so we will use the required function
+        username: yup.string().required('Username is required'),
+        // password can not be an empty string so we will use the required function. Also, we have used the `min` function to set the minimum length of the password. Yup passwords by default handle the conditions of at least one upper case, at least one lower case, and at least one special character in the password
+        password: yup.string().min(6).required('Passwords is required'),
+        passwordConf: yup.string()
+            .test('passwords-match', 'Passwords must match', function(value){
+            return this.parent.password === value
+        }),  
+    })
+
+    const validateForm = async e => {
+        // creating a form data object
+        let dataObject = {
+          name: name,
+          username: username,
+          password: password,
+          passwordConf: passwordConf,
+        }
+    
+        // validating this dataObject concerning Yup userSchema
+        const isValid = await userSchema.isValid(dataObject)
+        if (isValid) {
+            handleRegister();
+        } else {
+          alert('Form is Invalid')
+        }
+    }
 
     return (
         <div className="container col-lg-6">
@@ -44,7 +74,7 @@ const SignUp = () => {
                         <label>Password (Confirm)</label>
                         <input type="password" className="form-control" name="passwordConf" id="passwordConf" value={passwordConf} onChange={(e) => setPasswordConf(e.target.value)}  placeholder="Please confirm password" required/>
                     </div>
-                    <button onClick={handleRegister} className="btn btn-primary">Register</button>
+                    <button onClick={validateForm} className="btn btn-primary">Register</button>
                 </form>
             </div>
         </div>
