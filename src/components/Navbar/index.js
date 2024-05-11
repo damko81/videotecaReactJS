@@ -47,6 +47,11 @@ const Navbar = () => {
                         Add Movie
                     </NavLink>
                     }
+                    { (username!==null && username!==undefined) &&
+                    <NavLink to="/fileupload" activeStyle>
+                        Imp/Exp XML
+                    </NavLink>
+                    }
                     <NavLink to="/profile" activeStyle>
                         {username}
                     </NavLink>

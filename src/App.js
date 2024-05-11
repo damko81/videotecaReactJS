@@ -13,6 +13,7 @@ import Profile from "./pages/profile";
 import { useGetMovies } from './components/Movie/Action';
 import LoadDeleteMovies from './pages/LoadDeleteMovies';
 import CreateMovie from './components/Movie/CreateMovie';
+import FileUpload from './components/FileUpload/FileUpload';
 
 function App() {
  
@@ -46,6 +47,10 @@ function App() {
                      <Route
                         path="/profile"
                         element={<Profile />}
+                    />
+                    <Route
+                        path="/fileupload"
+                        element={<FileUpload />}
                     />
                 </Routes>
             </Router>
