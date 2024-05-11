@@ -45,7 +45,10 @@ export const upload = async file => {
    
     try {
 
-        await api.post('/file/upload',formData);
+        return await api.post('/file/upload',formData)
+                        .then((res) => {
+                            return res
+                        });          
         
     } catch (error) {
         console.error('Error upload file:', error,file.name);
@@ -57,7 +60,10 @@ export const upload = async file => {
     
     try {
  
-        await api.post('/file/export');
+        return await api.post('/file/export')
+                        .then((res) => {
+                            return res
+                        }); 
         
     } catch (error) {
         console.error('Error export file:', error);
@@ -69,7 +75,10 @@ export const upload = async file => {
     
     try {
  
-        await api.post(`/file/loadMoviesFromXml/${name}`);
+        return await api.post(`/file/loadMoviesFromXml/${name}`)
+                        .then((res) => {
+                            return res
+                        });
         
     } catch (error) {
         console.error('Error loaded file:', error);
@@ -79,6 +88,8 @@ export const upload = async file => {
 
   export const deleteFile = async (name) => {
 
-    const res= await api.delete(`/file/delete/${name}`);
-    return res;
+      return await api.delete(`/file/delete/${name}`)
+                         .then((res) => {
+                            return res
+                         });              
 };

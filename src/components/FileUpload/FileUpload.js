@@ -16,12 +16,18 @@ function FileUpload() {
             alert('You have to choose file Filmi.xml !');
         }
         else{
-            upload(file);
+            upload(file)
+            .then(() => {
+                window.location.reload(true);
+             });
         } 
     };
 
     const exportFile=()=>{
-        exprFile();
+        exprFile()
+            .then(() => {
+                window.location.reload(true);
+            });
     };
 
     const handleFileChange = (e) => {
@@ -32,7 +38,10 @@ function FileUpload() {
     };  
 
     const handleDelete=(filename)=>{
-        deleteFile(filename); // Brisanje v BE bazi
+        deleteFile(filename) // Brisanje v BE bazi
+         .then(() => {
+            window.location.reload(true);
+         });
     }
 
     const deleteDialog = (filename) => {
@@ -42,7 +51,10 @@ function FileUpload() {
     }
 
     const handleLoadMoviesFromXml=(filename)=>{
-        loadMoviesFromXml(filename);
+        loadMoviesFromXml(filename)
+            .then(() => {
+                window.location.reload(true);
+            });
     }
     
   return (
