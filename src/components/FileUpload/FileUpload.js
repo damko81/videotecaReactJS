@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { deleteFile, exprFile, upload, useGetDownloadFiles, useGetForLoginFiles } from './Action';
+import { deleteFile, exprFile, loadMoviesFromXml, upload, useGetDownloadFiles, useGetForLoginFiles } from './Action';
 import { getUsername } from '../../pages/Action';
 
 function FileUpload() {
@@ -39,6 +39,10 @@ function FileUpload() {
         if (window.confirm("Delete?")){ 
           handleDelete(filename);
         }      
+    }
+
+    const handleLoadMoviesFromXml=(filename)=>{
+        loadMoviesFromXml(filename);
     }
     
   return (
@@ -85,7 +89,7 @@ function FileUpload() {
                         <tr>
                             <td><a style={{color:'blue'}} href={file.url}>{file.name}</a></td>
                             <td>   
-                                <button className='btn btn-primary tooltips'>Load Movies</button>
+                                <button className='btn btn-primary tooltips' onClick={() => handleLoadMoviesFromXml(file.name)}>Load Movies</button>
                                 <button style={{marginLeft:10}} className='btn btn-danger' onClick={() => deleteDialog(file.name)}>Delete</button>
                             </td>
                         </tr>

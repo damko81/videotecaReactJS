@@ -65,6 +65,18 @@ export const upload = async file => {
 
   };
 
+  export const loadMoviesFromXml = async (name) => {
+    
+    try {
+ 
+        await api.post(`/file/loadMoviesFromXml/${name}`);
+        
+    } catch (error) {
+        console.error('Error loaded file:', error);
+    }
+
+  };
+
   export const deleteFile = async (name) => {
 
     const res= await api.delete(`/file/delete/${name}`);
