@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../config/api";
-import axios from "axios";
+import { getUsername } from "../../pages/Action";
 
 export const useGetDownloadFiles = () => {
  
@@ -31,8 +31,42 @@ export const useGetForLoginFiles = (username) => {
           .then((data) => {
             setLoginFiles(data);
           });
-      }, []);
+      }, [username]);
       
       return loginFiles;
    
+};
+
+export const upload = async file => {
+
+    let fileName = getUsername() + '_' + file.name;
+    let formData = new FormData();
+    formData.append('file', file, fileName);
+   
+    try {
+
+        await api.post('/file/upload',formData);
+        
+    } catch (error) {
+        console.error('Error upload file:', error,file.name);
+    }
+
+  };
+
+  export const exprFile = async () => {
+    
+    try {
+ 
+        await api.post('/file/export');
+        
+    } catch (error) {
+        console.error('Error export file:', error);
+    }
+
+  };
+
+  export const deleteFile = async (name) => {
+
+    const res= await api.delete(`/file/delete/${name}`);
+    return res;
 };

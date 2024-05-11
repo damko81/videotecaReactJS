@@ -1,27 +1,59 @@
 import React, { useState } from 'react'
-import { useGetDownloadFiles, useGetForLoginFiles } from './Action';
+import { deleteFile, exprFile, upload, useGetDownloadFiles, useGetForLoginFiles } from './Action';
 import { getUsername } from '../../pages/Action';
 
 function FileUpload() {
 
-  let exprFiles = useGetDownloadFiles(); 
-  let fileForLoginInfos = useGetForLoginFiles(getUsername());
+    let exprFiles = useGetDownloadFiles(); 
+    let fileForLoginInfos = useGetForLoginFiles(getUsername());
 
-  const [selectedFiles,setSelectedFiles]=useState(false); 
-  
+    const [file, setFile] = useState(File | null);
+    const [isSelectedFiles,setIsSelectedFiles]=useState(false); 
+
+    const uploadFile=()=>{
+
+        if(file.name != 'Filmi.xml'){
+            alert('You have to choose file Filmi.xml !');
+        }
+        else{
+            upload(file);
+        } 
+    };
+
+    const exportFile=()=>{
+        exprFile();
+    };
+
+    const handleFileChange = (e) => {
+        if (e.target.files) {
+            setFile(e.target.files[0]);
+            setIsSelectedFiles(true);
+        }
+    };  
+
+    const handleDelete=(filename)=>{
+        deleteFile(filename); // Brisanje v BE bazi
+    }
+
+    const deleteDialog = (filename) => {
+        if (window.confirm("Delete?")){ 
+          handleDelete(filename);
+        }      
+    }
+    
   return (
     <div className="modal-content">
       <div className="modal-body">
         <div className="col-8">
             <label className="btn btn-default p-0">
-                <input type="file" onChange={() => setSelectedFiles(!selectedFiles)}/>
+                <input type="file" id="file" onChange={handleFileChange}/>
             </label>
         </div>
         <div className="col-4">
-            <button disabled={!selectedFiles} className="btn btn-success btn-sm">
+            <button disabled={!isSelectedFiles} className="btn btn-success btn-sm" onClick={uploadFile}>
                 Upload
             </button>
-            <button style={{marginLeft:17}}  className="btn btn-success btn-sm">
+            <button style={{marginLeft:17}}  className="btn btn-success btn-sm" onClick={exportFile}>
                 Export
             </button>
             <div style={{marginTop:10}} className="card-header">List of exported Filmi.xml Files</div>
@@ -54,7 +86,7 @@ function FileUpload() {
                             <td><a style={{color:'blue'}} href={file.url}>{file.name}</a></td>
                             <td>   
                                 <button className='btn btn-primary tooltips'>Load Movies</button>
-                                <button style={{marginLeft:10}} className='btn btn-danger'>Delete</button>
+                                <button style={{marginLeft:10}} className='btn btn-danger' onClick={() => deleteDialog(file.name)}>Delete</button>
                             </td>
                         </tr>
                      ))
