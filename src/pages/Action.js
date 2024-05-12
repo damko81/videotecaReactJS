@@ -67,6 +67,7 @@ export const signInUser = async reqData => {
 
 export const updateUserAction = async reqData => {
   try {
+        //alert("id: " + reqData.id + " name: " + reqData.name + " username: " + reqData.username + " password: " + reqData.password);
         await api.put('/users/update', reqData);
         
   } catch (error) {

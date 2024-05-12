@@ -12,6 +12,7 @@ const [showUpdateMovie, setShowUpdateMovie] = useState(false);
 
 const handleDelete=(id)=>{
     deleteMovie(id); // Brisanje v BE bazi
+    window.location.reload(true);
 }
 
 const deleteDialog = (id) => {
