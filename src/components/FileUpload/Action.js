@@ -37,6 +37,24 @@ export const useGetForLoginFiles = (username) => {
    
 };
 
+export const useGetFiles = () => {
+ 
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+      fetch('http://192.168.1.14:8080/file/files')
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setFiles(data);
+        });
+    }, []);
+    
+    return files;
+ 
+};
+
 export const upload = async file => {
 
     let fileName = getUsername() + '_' + file.name;

@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { deleteFile, exprFile, loadMoviesFromXml, upload, useGetDownloadFiles, useGetForLoginFiles } from './Action';
-import { getUsername } from '../../pages/Action';
+import { deleteFile, exprFile, loadMoviesFromXml, upload, useGetDownloadFiles, useGetFiles, useGetForLoginFiles } from './Action';
+import { getAuthenticatedUser, getUsername } from '../../pages/Action';
 
 function FileUpload() {
+    
+    let authenticatedUser = getAuthenticatedUser();
 
     let exprFiles = useGetDownloadFiles(); 
     let fileForLoginInfos = useGetForLoginFiles(getUsername());
+    let fileInfos = useGetFiles();
 
     const [file, setFile] = useState(File | null);
     const [isSelectedFiles,setIsSelectedFiles]=useState(false); 
@@ -109,6 +112,31 @@ function FileUpload() {
                     }
                     </tbody>
                 </table>
+             {(authenticatedUser!==null && authenticatedUser!==undefined) && 
+                <div className="card-header">List for import All Filmi.xml Files</div>
+             }   
+             {(authenticatedUser!==null && authenticatedUser!==undefined) &&
+                <table className="table">
+                    <thead>
+                      <tr>
+                        <th>File Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {fileInfos.map((file) => (
+                        <tr>
+                            <td><a style={{color:'blue'}} href={file.url}>{file.name}</a></td>
+                            <td>   
+                                <button className='btn btn-primary tooltips' onClick={() => handleLoadMoviesFromXml(file.name)}>Load Movies</button>
+                                <button style={{marginLeft:10}} className='btn btn-danger' onClick={() => deleteDialog(file.name)}>Delete</button>
+                            </td>
+                        </tr>
+                     ))
+                    }
+                    </tbody>
+                </table>
+              } 
             </div>
         </div>
     </div>
