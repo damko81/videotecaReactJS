@@ -1,25 +1,32 @@
 import React, { useState } from 'react'
 import { getAuthenticatedUser, getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from './Action';
 
-export default function useProfile(selectedUser) {
+export default function useProfile({selectedUser}) {
 
-  const selectedUserId = Object.keys(selectedUser).map((keys)=>selectedUser[keys].id);
-  const selectedUserName = Object.keys(selectedUser).map((keys)=>selectedUser[keys].name);
-  const selectedUserUsername = Object.keys(selectedUser).map((keys)=>selectedUser[keys].username);
-  const selectedUserPassword = Object.keys(selectedUser).map((keys)=>selectedUser[keys].password); //TODO: password decode
+  var selectedUserId;
+  var selectedUserName;
+  var selectedUserUsername;
+  var selectedUserPassword;
 
-  let authenticatedUser = selectedUserId.length === 0 ? getAuthenticatedUser() : undefined;
+  if(selectedUser !== undefined){
+      selectedUserId = selectedUser.id;
+      selectedUserName = selectedUser.name;
+      selectedUserUsername = selectedUser.username;
+      selectedUserPassword = selectedUser.password;
+  }
+
+  let authenticatedUser = selectedUser === undefined ? getAuthenticatedUser() : undefined;
  
-  const [id]=useState(selectedUserId.length === 0?getId():selectedUserId);
-  const [name,setName]=useState(selectedUserId.length === 0?getName():selectedUserName);
-  const [username,setUsername]=useState(selectedUserId.length === 0?getUsername():selectedUserUsername);
-  const [password]=useState(selectedUserId.length === 0?getPassword():selectedUserPassword);
+  const [id]=useState(selectedUser === undefined?getId():selectedUserId);
+  const [name,setName]=useState(selectedUser === undefined?getName():selectedUserName);
+  const [username,setUsername]=useState(selectedUser === undefined?getUsername():selectedUserUsername);
+  const [password]=useState(selectedUser === undefined?getPassword():selectedUserPassword);
   const [newPassword,setNewPassword]=useState(null);
   const [newPasswordConf,setNewPasswordConf]=useState(null);
 
   const [changePassword, setChangePassword] = useState(false);  
 
-  var nameTmp = selectedUserId.length === 0 ? getName():selectedUserName;
+  var nameTmp = selectedUser === undefined ? getName():selectedUserName;
 
   const handleLogout=()=>{
     logoutUserAction();
@@ -36,7 +43,7 @@ export default function useProfile(selectedUser) {
                  };
 
     updateUserAction(values);
-    if(selectedUserId.length === 0){
+    if(selectedUser === undefined){
       handleLogout();
     }
     else{
