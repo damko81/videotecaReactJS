@@ -6,7 +6,7 @@ export default function useProfile(selectedUser) {
   const selectedUserId = Object.keys(selectedUser).map((keys)=>selectedUser[keys].id);
   const selectedUserName = Object.keys(selectedUser).map((keys)=>selectedUser[keys].name);
   const selectedUserUsername = Object.keys(selectedUser).map((keys)=>selectedUser[keys].username);
-  const selectedUserPassword = Object.keys(selectedUser).map((keys)=>selectedUser[keys].password);
+  const selectedUserPassword = Object.keys(selectedUser).map((keys)=>selectedUser[keys].password); //TODO: password decode
 
   let authenticatedUser = selectedUserId.length === 0 ? getAuthenticatedUser() : undefined;
  
@@ -19,7 +19,7 @@ export default function useProfile(selectedUser) {
 
   const [changePassword, setChangePassword] = useState(false);  
 
-  var nameTmp = getName();
+  var nameTmp = selectedUserId.length === 0 ? getName():selectedUserName;
 
   const handleLogout=()=>{
     logoutUserAction();
