@@ -12,7 +12,7 @@ function FileUpload() {
 
     const uploadFile=()=>{
 
-        if(file.name != 'Filmi.xml'){
+        if(file.name !== 'Filmi.xml'){
             alert('You have to choose file Filmi.xml !');
         }
         else{

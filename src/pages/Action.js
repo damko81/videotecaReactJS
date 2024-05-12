@@ -1,6 +1,27 @@
 import { api } from "../config/api";
 import Cookies from 'js-cookie';
 
+export const AuthenticationService = (username,password) => {
+
+      fetch('http://192.168.1.14:8080/movie/basicauth',{headers:{authorization: createBasicAuthToken(username, password)}})
+        .then((res) => {
+             registerSuccessfulLogin(username, password);
+             Cookies.set("authenticatedUser", username);
+             window.location.reload(true);
+        });
+}; 
+
+export const createBasicAuthToken = (username,password) => {
+    return 'Basic ' + window.btoa(username + ":" + password)
+}; 
+
+export const registerSuccessfulLogin = (username,password) => {
+   let basicAuthToken = createBasicAuthToken(username, password);
+   window.sessionStorage.setItem("authenticatedUser", basicAuthToken);
+   Cookies.set("username", username);
+   Cookies.set("password", password);
+}; 
+
 export const signUpUser = async reqData => {
   try {
 
@@ -11,18 +32,31 @@ export const signUpUser = async reqData => {
   }
 };
 
+export const handleLoginAuth = reqData => {
+  AuthenticationService(reqData.username,reqData.password);  
+}
+
 // singin user
 export const signInUser = async reqData => {
     try {
-            const response = await api.post('/users/login', reqData);
-            const {id, name, password,username} = response.data;
-         
-            // Store the credentials
-            Cookies.set('id', id);
-            Cookies.set('name', name);
-            Cookies.set('username', username);
-            Cookies.set('password', password);
-    
+           
+            //Preverimo, ali gre za autorizirano osebo in ta zmaga.
+            handleLoginAuth(reqData);
+
+            let authenticatedUser = getAuthenticatedUser();
+          
+            if(authenticatedUser===null  || authenticatedUser===undefined){
+                  const response = await api.post('/users/login', reqData);
+                  const {id, name, password,username} = response.data;
+                
+                  registerSuccessfulLogin(username, password);
+
+                  // Store the credentials
+                  Cookies.set('id', id);
+                  Cookies.set('name', name);
+                  Cookies.set('username', username);
+                  Cookies.set('password', password);
+            }
             return true;
           
     } catch (error) {
@@ -56,9 +90,15 @@ export const getName = () => {
     return Cookies.get("name");
   };
 
+  export const getAuthenticatedUser = () => {
+    return Cookies.get("authenticatedUser");
+  };  
+
 export const logoutUserAction = () => {
     Cookies.remove('id');
     Cookies.remove('name');
     Cookies.remove('username');
     Cookies.remove('password');
+    Cookies.remove('authenticatedUser');
+    window.sessionStorage.removeItem("authenticatedUser");
   };

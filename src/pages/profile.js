@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from './Action';
+import { getAuthenticatedUser, getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from './Action';
 
 export default function useProfile() {
+
+  let authenticatedUser = getAuthenticatedUser();
 
   const [id]=useState(getId());
   const [name,setName]=useState(getName());
@@ -71,10 +73,12 @@ export default function useProfile() {
                         <input type="password" name="newPasswordConf" className="form-control" value={newPasswordConf} onChange={(e) => setNewPasswordConf(e.target.value)} id="newPasswordConf" placeholder="Please confirm New Password"/>
                       </div>
                     }
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" onClick={() => setChangePassword(!changePassword)}>Change password</button>
-                      <button type="button" className="btn btn-primary" onClick={updateDialog}>Save changes</button>
-                    </div>
+                    { (authenticatedUser===null  || authenticatedUser===undefined) &&
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" onClick={() => setChangePassword(!changePassword)}>Change password</button>
+                        <button type="button" className="btn btn-primary" onClick={updateDialog}>Save changes</button>
+                      </div>
+                    }
                 </form>
               </div>
           </div>
