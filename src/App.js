@@ -14,6 +14,7 @@ import { useGetMovies } from './components/Movie/Action';
 import LoadDeleteMovies from './pages/LoadDeleteMovies';
 import CreateMovie from './components/Movie/CreateMovie';
 import FileUpload from './components/FileUpload/FileUpload';
+import UsersManage from './components/UsersManage/UsersManage';
 
 function App() {
  
@@ -51,6 +52,10 @@ function App() {
                     <Route
                         path="/fileupload"
                         element={<FileUpload />}
+                    />
+                     <Route
+                        path="/users"
+                        element={<UsersManage />}
                     />
                 </Routes>
             </Router>

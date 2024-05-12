@@ -5,11 +5,12 @@ import {
     Bars,
     NavMenu
 } from "./NavbarElements";
-import {getUsername, logoutUserAction } from "../../pages/Action";
+import {getAuthenticatedUser, getUsername, logoutUserAction } from "../../pages/Action";
 
 const Navbar = () => {
 
     let username = getUsername();
+    let authenticatedUser = getAuthenticatedUser();
     
     const handleLogout = () => {
         logoutUserAction(); 
@@ -50,6 +51,11 @@ const Navbar = () => {
                     { (username!==null && username!==undefined) &&
                     <NavLink to="/fileupload" activeStyle>
                         Imp/Exp XML
+                    </NavLink>
+                    }
+                     { (authenticatedUser!==null && authenticatedUser!==undefined) &&
+                    <NavLink to="/users" activeStyle>
+                        Users
                     </NavLink>
                     }
                     <NavLink to="/profile" activeStyle>

@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { getAuthenticatedUser, getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from './Action';
 
-export default function useProfile() {
+export default function useProfile(selectedUser) {
 
-  let authenticatedUser = getAuthenticatedUser();
+  const selectedUserId = Object.keys(selectedUser).map((keys)=>selectedUser[keys].id);
+  const selectedUserName = Object.keys(selectedUser).map((keys)=>selectedUser[keys].name);
+  const selectedUserUsername = Object.keys(selectedUser).map((keys)=>selectedUser[keys].username);
+  const selectedUserPassword = Object.keys(selectedUser).map((keys)=>selectedUser[keys].password);
 
-  const [id]=useState(getId());
-  const [name,setName]=useState(getName());
-  const [username,setUsername]=useState(getUsername());
-  const [password]=useState(getPassword());
+  let authenticatedUser = selectedUserId.length === 0 ? getAuthenticatedUser() : undefined;
+ 
+  const [id]=useState(selectedUserId.length === 0?getId():selectedUserId);
+  const [name,setName]=useState(selectedUserId.length === 0?getName():selectedUserName);
+  const [username,setUsername]=useState(selectedUserId.length === 0?getUsername():selectedUserUsername);
+  const [password]=useState(selectedUserId.length === 0?getPassword():selectedUserPassword);
   const [newPassword,setNewPassword]=useState(null);
   const [newPasswordConf,setNewPasswordConf]=useState(null);
 
@@ -29,9 +34,14 @@ export default function useProfile() {
                     username:username,
                     password:(newPassword !== null && newPassword !== '' && newPasswordConf !== null && newPasswordConf !== '' && newPassword === newPasswordConf)?newPassword:password
                  };
-  
+
     updateUserAction(values);
-    handleLogout();
+    if(selectedUserId.length === 0){
+      handleLogout();
+    }
+    else{
+      window.location.reload(true);
+    }
   }
 
   const updateDialog = () => {
